@@ -1,102 +1,144 @@
-<!DOCTYPE html>
-
     <!-- Team Page
              UWAFT Team Page Website
              HTML 5 and PHP technologies used
              
              Revision History
                     Thida Pao, 2014.11.04: Complete redesign of Team Page
+					Terene,    2014.11.05: re-organized the html page to php with header and footer
+					Thida Pao. 2014.12.04: Pull from the database to dynamtically display members
                     
     -->
-<html>
-  <head>
-    <title> UWAFT Team Page </title>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-  </head>
+	
+	<?php
+//inital setup for this page, this has to be set before include header
+$page_title = "Our team";
+$page_author = "Chanthida Pao";
+$page_description = "This it the UWAFT team page";
+//put each needed css link as a element in this array
+$page_css = array();
+//put each needed meta data as a element in this array
+$page_meta = array();
+//put needed javascript script here
+$page_js = array();
 
-  <body>
+include_once "includes/header.php";
+include("includes/databaseConnection.php");
+
+
+?>
   <center>
   <img src="images/teamAmerica.jpg">
   </center>
   <p></p>
   <p></p>
     <div class="container marketing">
+
+<!-- Project Management Section -->
+    <h2>Project Management</h2>
       <div class="row">
-        <div class="col-lg-4">
-          <img src="images/profile1.jpg" alt="Generic placeholder image" style="width: 140px; height: 140px;">
-          <h2>Manager</h2>
-          <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>         
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-          <img src="images/profile2.jpg" alt="Generic placeholder image" style="width: 140px; height: 140px;">
-          <h2>Assistant Manager</h2>
-          <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-          <img src="images/profile3.jpg" alt="Generic placeholder image" style="width: 140px; height: 140px;">
-          <h2>Project Manager</h2>
-          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-        </div><!-- /.col-lg-4 -->
-      </div><!-- /.row -->
 
-            <div class="row">
-        <div class="col-lg-4">
-          <img src="images/profile4.jpg" alt="Generic placeholder image" style="width: 140px; height: 140px;">
-          <h2>Manager</h2>
-          <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>         
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-          <img src="images/profile5.jpg" alt="Generic placeholder image" style="width: 140px; height: 140px;">
-          <h2>Assistant Manager</h2>
-          <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-          <img src="images/profile6.jpg" alt="Generic placeholder image" style="width: 140px; height: 140px;">
-          <h2>Project Manager</h2>
-          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-        </div><!-- /.col-lg-4 -->
-      </div><!-- /.row -->
+    <?php 
+    include("includes/databaseConnection.php");
 
-            <div class="row">
-        <div class="col-lg-4">
-          <img src="images/profile7.jpg" alt="Generic placeholder image" style="width: 140px; height: 140px;">
-          <h2>Manager</h2>
-          <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>         
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-          <img src="images/profile8.jpg" alt="Generic placeholder image" style="width: 140px; height: 140px;">
-          <h2>Assistant Manager</h2>
-          <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-          <img src="images/profile9.jpg" alt="Generic placeholder image" style="width: 140px; height: 140px;">
-          <h2>Project Manager</h2>
-          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-        </div><!-- /.col-lg-4 -->
-      </div><!-- /.row -->
+    $projectmanagementTeamResult=mysqli_query($link,"SELECT firstName, lastName,
+    position, program, growup, favEco, cereal, bucket, facts FROM projectmanagement ORDER BY firstName");
+    
 
+    while( $row = mysqli_fetch_array($projectmanagementTeamResult, MYSQLI_BOTH) )
+    {
+        if($projectmanagementTeamResult->num_rows > 0)
+        {
+        echo '<div class="col-lg-4">';
+
+        echo '<h3>'.$row['firstName'].' '.$row['lastName'].'</h3>';
+        echo '<h4>'.$row['position'].'</h4>';
+        echo '<h5> Program '.$row['program'].'</h5>';
+        echo '<p>When I was a kid I wanted to be: '.$row['growup'].'</p>';
+        echo '<p>Favorite part of EcoCAR/UWAFT: '.$row['favEco'].'</p>';
+        echo '<p>Favorite Breakfast Cereal: '.$row['cereal'].'</p>';
+        echo '<p>Three things on my bucket list: '.$row['bucket'].'</p>';
+        echo '<p>Two things about me: '.$row['facts'].'</p>';
+        echo '</div>';
+        
+      }
+    }
+
+          mysqli_close($link);
+    ?>
+    </div><!-- /.row -->
+
+<!-- Technical Team Section -->
+    <h2>Technical Team</h2>
       <div class="row">
-        <div class="col-lg-4">
-          <img src="images/profile10.jpg" alt="Generic placeholder image" style="width: 140px; height: 140px;">
-          <h2>Manager</h2>
-          <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>         
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-          <img src="images/profile11.jpg" alt="Generic placeholder image" style="width: 140px; height: 140px;">
-          <h2>Assistant Manager</h2>
-          <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-          <img src="images/profile1.jpg" alt="Generic placeholder image" style="width: 140px; height: 140px;">
-          <h2>Project Manager</h2>
-          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-        </div><!-- /.col-lg-4 -->
-      </div><!-- /.row -->
 
-      </div>
-      <script src="http://code.jquery.com/jquery.js"></script>
-      <script src="js/bootstrap.min.js"></script>
-  </body>
-  </html>
+    <?php 
+    include("includes/databaseConnection.php");
+
+    $technicalTeamResult=mysqli_query($link,"SELECT firstName, lastName,
+    position, program, growup, favEco, cereal, bucket, facts FROM technical ORDER BY firstName");
+    
+
+    while( $row = mysqli_fetch_array($technicalTeamResult, MYSQLI_BOTH) )
+    {
+        if($technicalTeamResult->num_rows > 0)
+        {
+        echo '<div class="col-lg-4">';
+
+        echo '<h3>'.$row['firstName'].' '.$row['lastName'].'</h3>';
+        echo '<h4>'.$row['position'].'</h4>';
+        echo '<h5> Program '.$row['program'].'</h5>';
+        echo '<p>When I was a kid I wanted to be: '.$row['growup'].'</p>';
+        echo '<p>Favorite part of EcoCAR/UWAFT: '.$row['favEco'].'</p>';
+        echo '<p>Favorite Breakfast Cereal: '.$row['cereal'].'</p>';
+        echo '<p>Three things on my bucket list: '.$row['bucket'].'</p>';
+        echo '<p>Two things about me: '.$row['facts'].'</p>';
+        echo '</div>';
+        
+      }
+    }
+
+          mysqli_close($link);
+    ?>
+    </div><!-- /.row -->
+
+<!-- Communications Team Section -->
+    <h2>Communications Team</h2>
+      <div class="row">
+
+    <?php 
+    include("includes/databaseConnection.php");
+
+    $comTeamResult=mysqli_query($link,"SELECT firstName, lastName,
+    position, program, growup, favEco, cereal, bucket, facts FROM communications ORDER BY firstName");
+    
+
+    while( $row = mysqli_fetch_array($comTeamResult, MYSQLI_BOTH) )
+    {
+        if($comTeamResult->num_rows > 0)
+        {
+        echo '<div class="col-lg-4">';
+
+        echo '<h3>'.$row['firstName'].' '.$row['lastName'].'</h3>';
+        echo '<h4>'.$row['position'].'</h4>';
+        echo '<h5> Program '.$row['program'].'</h5>';
+        echo '<p>When I was a kid I wanted to be: '.$row['growup'].'</p>';
+        echo '<p>Favorite part of EcoCAR/UWAFT: '.$row['favEco'].'</p>';
+        echo '<p>Favorite Breakfast Cereal: '.$row['cereal'].'</p>';
+        echo '<p>Three things on my bucket list: '.$row['bucket'].'</p>';
+        echo '<p>Two things about me: '.$row['facts'].'</p>';
+        echo '</div>';
+        
+      }
+    }
+
+          mysqli_close($link);
+    ?>
+    </div><!-- /.row -->
+      
+
+    </div>
+<?php
+    include_once "includes/footer.php";
+ ?>
+ </body>
+ </html>
