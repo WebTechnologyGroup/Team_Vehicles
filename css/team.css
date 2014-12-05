@@ -1,0 +1,15 @@
+@import url(http://fonts.googleapis.com/css?family=Poiret+One);
+
+body{
+	font-family:'Poiret One Bold', 'Poiret One';
+}
+
+.img-overlay {
+    position: relative;
+    max-width: 315px; //whatever your max-width should be 
+}
+
+.teampic {
+	height: 161px;
+	width: auto;
+}

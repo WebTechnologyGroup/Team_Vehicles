@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+
+
     <!-- Team Page
              UWAFT Team Page Website
              HTML 5 and PHP technologies used
@@ -6,11 +7,10 @@
              Revision History
                     Thida Pao, 2014.11.04: Complete redesign of Team Page
 					Terene,    2014.11.05: re-organized the html page to php with header and footer
-					Thida Pao. 2014.12.04: Pull from the database to dynamtically display members
                     
     -->
 <html>	
-<?php
+	<?php
 //inital setup for this page, this has to be set before include header
 $page_title = "Our team";
 $page_author = "Chanthida Pao";
@@ -28,15 +28,16 @@ include("includes/databaseConnection.php");
 
 ?>
 <head>
-<title> UWAFT Team Page </title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- Bootstrap -->
-<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-</head>
 
-<body>
+	<link href="css/team.css" rel="stylesheet">
+	<!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <title>UWAFT Team Page</title>
+
+</head>
   <center>
-  <img src="images/teamAmerica.jpg">
+  <img src="images/teamAmerica.jpg" class="img-responsive">
   </center>
   <p></p>
   <p></p>
@@ -50,15 +51,20 @@ include("includes/databaseConnection.php");
     include("includes/databaseConnection.php");
 
     $projectmanagementTeamResult=mysqli_query($link,"SELECT firstName, lastName,
-    position, program, growup, favEco, cereal, bucket, facts FROM projectmanagement ORDER BY firstName");
+    position, program, growup, favEco, cereal, bucket, facts, profileImage FROM projectmanagement ORDER BY firstName");
     
-
     while( $row = mysqli_fetch_array($projectmanagementTeamResult, MYSQLI_BOTH) )
     {
         if($projectmanagementTeamResult->num_rows > 0)
         {
-        echo '<div class="col-lg-4">';
 
+        echo '<div class='."col-lg-4".'>';
+        //echo '<div class='."teampic".'>';
+       // echo '<img src='."./images/patrickellsworth.jpg".' class= '."img-responsive".'>';
+        echo '<img src= '."./".$row['profileImage']."".' class= '."teampic".'>';
+        
+        echo '<p class='."img-overlay".'>';
+        //text for each profile picture             
         echo '<h3>'.$row['firstName'].' '.$row['lastName'].'</h3>';
         echo '<h4>'.$row['position'].'</h4>';
         echo '<h5> Program '.$row['program'].'</h5>';
@@ -67,8 +73,9 @@ include("includes/databaseConnection.php");
         echo '<p>Favorite Breakfast Cereal: '.$row['cereal'].'</p>';
         echo '<p>Three things on my bucket list: '.$row['bucket'].'</p>';
         echo '<p>Two things about me: '.$row['facts'].'</p>';
+        echo '</p>';
         echo '</div>';
-        
+        //echo '</div>';
       }
     }
 
@@ -84,14 +91,20 @@ include("includes/databaseConnection.php");
     include("includes/databaseConnection.php");
 
     $technicalTeamResult=mysqli_query($link,"SELECT firstName, lastName,
-    position, program, growup, favEco, cereal, bucket, facts FROM technical ORDER BY firstName");
+    position, program, growup, favEco, cereal, bucket, facts, profileImage FROM technical ORDER BY firstName");
     
 
     while( $row = mysqli_fetch_array($technicalTeamResult, MYSQLI_BOTH) )
     {
         if($technicalTeamResult->num_rows > 0)
         {
-        echo '<div class="col-lg-4">';
+
+        echo '<div class='."col-lg-4".'>';
+        //echo '<div class='."teampic".'>';
+        echo '<img src= '."./".$row['profileImage']."".' class= '."teampic".'>';
+        
+        echo '<p class='."img-overlay".'>';
+        //text for each profile picture  
 
         echo '<h3>'.$row['firstName'].' '.$row['lastName'].'</h3>';
         echo '<h4>'.$row['position'].'</h4>';
@@ -102,7 +115,7 @@ include("includes/databaseConnection.php");
         echo '<p>Three things on my bucket list: '.$row['bucket'].'</p>';
         echo '<p>Two things about me: '.$row['facts'].'</p>';
         echo '</div>';
-        
+        //echo '</div>';
       }
     }
 
@@ -118,14 +131,20 @@ include("includes/databaseConnection.php");
     include("includes/databaseConnection.php");
 
     $comTeamResult=mysqli_query($link,"SELECT firstName, lastName,
-    position, program, growup, favEco, cereal, bucket, facts FROM communications ORDER BY firstName");
+    position, program, growup, favEco, cereal, bucket, facts, profileImage FROM communications ORDER BY firstName");
     
 
     while( $row = mysqli_fetch_array($comTeamResult, MYSQLI_BOTH) )
     {
         if($comTeamResult->num_rows > 0)
         {
-        echo '<div class="col-lg-4">';
+
+        echo '<div class='."col-lg-4".'>';
+        //echo '<div class='."teampic".'>';
+        echo '<img src= '."./".$row['profileImage']."".' class= '."teampic".'>';
+        
+        echo '<p class='."img-overlay".'>';
+        //text for each profile picture  
 
         echo '<h3>'.$row['firstName'].' '.$row['lastName'].'</h3>';
         echo '<h4>'.$row['position'].'</h4>';
@@ -136,7 +155,7 @@ include("includes/databaseConnection.php");
         echo '<p>Three things on my bucket list: '.$row['bucket'].'</p>';
         echo '<p>Two things about me: '.$row['facts'].'</p>';
         echo '</div>';
-        
+        //echo '</div>';
       }
     }
 
@@ -145,9 +164,7 @@ include("includes/databaseConnection.php");
     </div><!-- /.row -->
       
 
-    </div>
+ </div>
 <?php
     include_once "includes/footer.php";
  ?>
- </body>
- </html>
