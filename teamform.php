@@ -193,7 +193,8 @@ include_once "includes/header.php";
     if(@$_REQUEST['action']=="del")
     {
         mysqli_query($link, "DELETE FROM communications WHERE id=".round($_REQUEST['id']));
-    }    
+    } 
+    mysqli_close($link);   
     ?>
     </table>
     </div>
